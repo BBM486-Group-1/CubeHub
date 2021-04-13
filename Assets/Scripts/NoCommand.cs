@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveRightCommand : MonoBehaviour, ICommand
+public class NoCommand : MonoBehaviour, ICommand
 {
     // Start is called before the first frame update
     void Start()
@@ -15,8 +15,9 @@ public class MoveRightCommand : MonoBehaviour, ICommand
     {
         
     }
-    
-    void ICommand.execute(){}
-    void ICommand.undo(){}
 
+    void ICommand.execute(){}
+    void ICommand.undo(){
+
+    }
 }
