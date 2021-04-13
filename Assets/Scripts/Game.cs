@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
 
     GameObject[] cubes; 
     [SerializeField] int numberOfCubes;
+    InputHandler inputHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,10 @@ public class Game : MonoBehaviour
             cube.transform.position = new Vector3(2 * i , 0, 0);
             cubes[i] = cube;
         }
+
+        inputHandler = new InputHandler();
+        
+
         
         
     }

@@ -17,7 +17,6 @@ public class NoCommand : MonoBehaviour, ICommand
     }
 
     void ICommand.execute(){}
-    void ICommand.undo(){
-
-    }
+    void ICommand.undo(){}
+    
 }

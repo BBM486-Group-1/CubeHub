@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveRightCommand : MonoBehaviour, ICommand
+public class MoveRightCommand : ICommand
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+    GameObject cube;
+
+    
+    void ICommand.execute(){
         
     }
     
-    void ICommand.execute(){}
-    void ICommand.undo(){}
+    void ICommand.undo(){
+
+    }
 
 }
