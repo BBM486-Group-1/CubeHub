@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoCommand : MonoBehaviour, ICommand
+public class NoCommand :  ICommand
 {
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class NoCommand : MonoBehaviour, ICommand
         
     }
 
-    void ICommand.execute(){}
-    void ICommand.undo(){}
+    void ICommand.Execute(){}
+    void ICommand.Undo(){}
     
 }

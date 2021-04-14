@@ -1,44 +1,50 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Command;
 using UnityEngine;
+using MoveRightCommand = Command.MoveRightCommand;
 
 
 public class InputHandler : MonoBehaviour
-{
-    ICommand[] buttons;
-    ICommand undoButton;
+{ 
+    private Dictionary<string, ICommand> _commands;
 
-    [SerializeField] int buttonCount;
-
+    [SerializeField] private Cursor _cursor;
+    
     // Start is called before the first frame update
     void Start()
     {
-        buttons = new ICommand[this.buttonCount];
-        ICommand noCommand = new NoCommand();
-        for(int i = 0; i< buttonCount; i++){
-            buttons[i] = noCommand;
-        }
-        this.undoButton = noCommand;
+        _commands = new Dictionary<string, ICommand>();
+        
+        SetCommand("a", new MoveLeftCommand(_cursor));
+        SetCommand("d", new MoveRightCommand(_cursor)); 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.anyKeyDown)
+        {
+            if (_commands.ContainsKey(Input.inputString))
+            {
+                KeyPressed(Input.inputString);
+            }
+        }
+    }
+
+    public void SetCommand(string key, ICommand command){ 
+        this._commands[key] = command;
+    }
+
+    public void KeyPressed(string key) {
+        this._commands[key].Execute();
         
+        // this.undoButton = buttons[buttonNo];
     }
 
-    public void setCommand(int buttonNo, ICommand command){
-        
-        this.buttons[buttonNo] = command;
-    }
-
-    public void buttonPressed(int buttonNo) {
-        this.buttons[buttonNo].execute();
-        this.undoButton = buttons[buttonNo];
-    }
-
-    public void undoButtonPressed() {
-        this.undoButton.undo();
+    public void UndoKeyPressed() {
+         
     }
 
 }
