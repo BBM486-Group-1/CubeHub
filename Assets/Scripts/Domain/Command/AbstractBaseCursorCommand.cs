@@ -1,10 +1,12 @@
-﻿namespace Command
+﻿using Domain.Object;
+
+namespace Command
 {
-    public abstract class BaseCursorCommand : ICommand
+    public abstract class AbstractBaseCursorCommand : ICommand
     {
         protected Cursor Cursor;
 
-        public BaseCursorCommand(Cursor cursor)
+        public AbstractBaseCursorCommand(Cursor cursor)
         {
             Cursor = cursor;
         }

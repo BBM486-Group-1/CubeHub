@@ -1,6 +1,9 @@
-﻿namespace Command
+﻿using Command;
+using Domain.Object;
+
+namespace Domain.Command
 {
-    public class ToggleSelectCommand : BaseCursorCommand
+    public class ToggleSelectCommand : AbstractBaseCursorCommand
     {
         public ToggleSelectCommand(Cursor cursor) : base(cursor)
         {

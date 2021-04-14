@@ -1,6 +1,9 @@
-﻿namespace Command
+﻿using Command;
+using Domain.Object;
+
+namespace Domain.Command
 {
-    public class MoveRightCommand : BaseCursorCommand
+    public class MoveRightCommand : AbstractBaseCursorCommand
     {
         
         public MoveRightCommand(Cursor cursor) : base(cursor)

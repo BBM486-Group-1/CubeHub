@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Behaviour;
 using Command;
+using Domain.Command;
 using UnityEngine;
 using UnityEngine.Serialization;
-using MoveRightCommand = Command.MoveRightCommand;
+using MoveRightCommand = Domain.Command.MoveRightCommand;
 
 
 public class InputHandler : MonoBehaviour
 { 
     private Dictionary<string, ICommand> _commands;
 
-    [SerializeField] private Cursor cursor;
+    [SerializeField] private CursorController cursorController;
     
     // Start is called before the first frame update
     void Start()
     {
         _commands = new Dictionary<string, ICommand>();
         
-        SetCommand("a", new MoveLeftCommand(cursor));
-        SetCommand("d", new MoveRightCommand(cursor)); 
-        SetCommand(" ", new ToggleSelectCommand(cursor));
+        RegisterCommand("a", new MoveLeftCommand(cursorController.GetCursor()));
+        RegisterCommand("d", new MoveRightCommand(cursorController.GetCursor())); 
+        RegisterCommand(" ", new ToggleSelectCommand(cursorController.GetCursor()));
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    public void SetCommand(string key, ICommand command){ 
+    public void RegisterCommand(string key, ICommand command){ 
         _commands[key] = command;
     }
 

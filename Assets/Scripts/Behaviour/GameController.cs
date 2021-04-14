@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private Cursor _cursor;
 
-    [SerializeField] private InputHandler _inputHandler;
+    [SerializeField] private InputHandler inputHandler;
 
     // Start is called before the first frame update
     void Start()
