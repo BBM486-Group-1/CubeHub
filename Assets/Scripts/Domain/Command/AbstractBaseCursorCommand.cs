@@ -1,6 +1,6 @@
 ﻿using Domain.Object;
 
-namespace Command
+namespace Domain.Command
 {
     public abstract class AbstractBaseCursorCommand : ICommand
     {

@@ -1,5 +1,4 @@
-﻿using Command;
-using Domain.Object;
+﻿using Domain.Object;
 
 namespace Domain.Command
 {

@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 7828788}
   - component: {fileID: 7828787}
   - component: {fileID: 7828789}
+  - component: {fileID: 7828790}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -180,7 +181,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7854d4579110e6448925bfbc41e31334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorController: {fileID: 584594377}
+  cursorController: {fileID: 7828790}
+--- !u!114 &7828790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7828786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a348d9689a401d9a0109440db526f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorObject: {fileID: 584594374}
 --- !u!1 &538073737
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 584594375}
   - component: {fileID: 584594376}
-  - component: {fileID: 584594377}
   m_Layer: 0
   m_Name: Cursor Object
   m_TagString: Untagged
@@ -327,19 +340,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &584594377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584594374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7a348d9689a401d9a0109440db526f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursorObject: {fileID: 584594374}
 --- !u!1 &848359401
 GameObject:
   m_ObjectHideFlags: 0
