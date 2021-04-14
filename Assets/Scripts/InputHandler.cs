@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Command;
 using UnityEngine;
+using UnityEngine.Serialization;
 using MoveRightCommand = Command.MoveRightCommand;
 
 
@@ -10,15 +11,16 @@ public class InputHandler : MonoBehaviour
 { 
     private Dictionary<string, ICommand> _commands;
 
-    [SerializeField] private Cursor _cursor;
+    [SerializeField] private Cursor cursor;
     
     // Start is called before the first frame update
     void Start()
     {
         _commands = new Dictionary<string, ICommand>();
         
-        SetCommand("a", new MoveLeftCommand(_cursor));
-        SetCommand("d", new MoveRightCommand(_cursor)); 
+        SetCommand("a", new MoveLeftCommand(cursor));
+        SetCommand("d", new MoveRightCommand(cursor)); 
+        SetCommand(" ", new ToggleSelectCommand(cursor));
     }
 
     // Update is called once per frame
@@ -34,11 +36,11 @@ public class InputHandler : MonoBehaviour
     }
 
     public void SetCommand(string key, ICommand command){ 
-        this._commands[key] = command;
+        _commands[key] = command;
     }
 
     public void KeyPressed(string key) {
-        this._commands[key].Execute();
+        _commands[key].Execute();
         
         // this.undoButton = buttons[buttonNo];
     }

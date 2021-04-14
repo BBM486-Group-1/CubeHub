@@ -16,7 +16,14 @@ public class NoCommand :  ICommand
         
     }
 
-    void ICommand.Execute(){}
-    void ICommand.Undo(){}
-    
+
+    public void Execute()
+    {
+        
+    }
+
+    public void Undo()
+    {
+        
+    }
 }
