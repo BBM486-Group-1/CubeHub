@@ -1,6 +1,4 @@
-﻿using Domain.Object;
-
-namespace Domain.Command
+﻿namespace Domain.Command
 {
     public class MoveUpCommand : AbstractBaseMoveCommand
     {

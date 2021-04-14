@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DataStructure;
+using UnityEngine;
 
 namespace Domain.Object
 {
@@ -8,7 +9,9 @@ namespace Domain.Object
         {
             _isActive = false;
         }
-         
+
+        private DiscretePositionMap<Cube> _cubePositionMap;
+        
         private bool _isActive;
     
         private static readonly int ColorPropertyName = Shader.PropertyToID("_Color");
@@ -34,6 +37,62 @@ namespace Domain.Object
         public bool IsActive()
         {
             return _isActive;
+        }
+
+        public void SetCubePositionMap(DiscretePositionMap<Cube> map)
+        {
+            _cubePositionMap = map;
+        }
+
+        private delegate void MoveCube(Cube cube);
+
+        private void MoveCubeUnderIfOccupied(MoveCube moveCube)
+        { 
+            if (IsActive())
+            {
+                if (_cubePositionMap.Occupied(GetPosition()))
+                {
+                    Cube cube = _cubePositionMap.Get(GetPosition());
+                    moveCube(cube);
+                    _cubePositionMap.Relocate(GetPosition(), cube.GetPosition());
+                }
+            }
+        }
+        
+        public override void MoveLeft()
+        {
+            MoveCubeUnderIfOccupied(cube => cube.MoveLeft());
+            base.MoveLeft();
+        }
+
+        public override void MoveRight()
+        {
+            MoveCubeUnderIfOccupied(cube => cube.MoveRight());
+            base.MoveRight();
+        }
+
+        public override void MoveUp()
+        {
+            MoveCubeUnderIfOccupied(cube => cube.MoveUp());
+            base.MoveUp();
+        }
+
+        public override void MoveDown()
+        {
+            MoveCubeUnderIfOccupied(cube => cube.MoveDown());
+            base.MoveDown();
+        }
+
+        public override void MoveForward()
+        {
+            MoveCubeUnderIfOccupied(cube => cube.MoveForward());
+            base.MoveForward();
+        }
+
+        public override void MoveBackward()
+        {
+            MoveCubeUnderIfOccupied(cube => cube.MoveBackward());
+            base.MoveBackward();
         }
     }
 }

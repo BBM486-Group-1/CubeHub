@@ -3,7 +3,6 @@ using Domain.Command;
 using UnityEngine;
 using Cursor = Domain.Object.Cursor;
 
-
 namespace Behaviour
 {
     public class InputHandler : MonoBehaviour

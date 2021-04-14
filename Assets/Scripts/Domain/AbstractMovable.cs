@@ -16,31 +16,36 @@ namespace Domain
             GameObject.transform.position = position;
         }
 
-        public void MoveLeft()
+        public Vector3 GetPosition()
+        {
+            return GameObject.transform.position;
+        }
+
+        public virtual void MoveLeft()
         {
             // TODO: Lerp these, instead of instantly translating.
             GameObject.transform.Translate(-1, 0, 0);
         }
     
-        public void MoveRight()
+        public virtual void MoveRight()
         {
             GameObject.transform.Translate(1, 0, 0);
         }
-        public void MoveUp()
+        public virtual void MoveUp()
         {
             GameObject.transform.Translate(0, 1, 0);
         }
     
-        public void MoveDown()
+        public virtual void MoveDown()
         {
             GameObject.transform.Translate(0, -1, 0);
         }
-        public void MoveForward()
+        public virtual void MoveForward()
         {
             GameObject.transform.Translate(0, 0, 1);
         }
     
-        public void MoveBackward()
+        public virtual void MoveBackward()
         {
             GameObject.transform.Translate(0, 0, -1);
         }

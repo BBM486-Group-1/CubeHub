@@ -1,6 +1,4 @@
-﻿using Behaviour;
-
-namespace Domain.Command
+﻿namespace Domain.Command
 {
     public abstract  class AbstractBaseMoveCommand : ICommand
     {
