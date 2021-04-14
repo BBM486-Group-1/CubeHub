@@ -18,6 +18,10 @@ namespace Behaviour
 
             for (var i = 0; i < numberOfCubes; i++ ){
                 var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                
+                var newMat = Resources.Load("BoxMaterial", typeof(Material)) as Material;
+                cube.GetComponent<MeshRenderer>().material = newMat;
+                
                 var x = Random.Range(-20, 20);
                 var y = Random.Range(-5,   5);
                 var z = Random.Range(-20, 20);
