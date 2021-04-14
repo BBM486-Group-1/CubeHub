@@ -12,6 +12,11 @@ namespace Behaviour
 
         private void Start()
         {
+            
+        }
+
+        private void OnEnable()
+        {
             _cursor = new Cursor(cursorObject);
         }
 

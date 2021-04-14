@@ -7,9 +7,7 @@ namespace Behaviour
     {
         [SerializeField] private int numberOfCubes;
     
-        private ArrayList _cubes; 
-
-        [SerializeField] private Cursor _cursor;
+        private ArrayList _cubes;  
 
         [SerializeField] private InputHandler inputHandler;
 

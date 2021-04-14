@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Domain.Command;
 using UnityEngine;
-using MoveRightCommand = Domain.Command.MoveRightCommand;
+
 
 
 namespace Behaviour
