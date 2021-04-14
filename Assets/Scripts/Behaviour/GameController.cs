@@ -6,8 +6,9 @@ namespace Behaviour
     public class GameController : MonoBehaviour
     {
         [SerializeField] private int numberOfCubes;
-    
-        private ArrayList _cubes;  
+        [SerializeField] private Material boxMaterial;
+
+        private ArrayList _cubes;
 
         [SerializeField] private InputHandler inputHandler;
 
