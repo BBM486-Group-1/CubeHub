@@ -2,20 +2,20 @@
 
 namespace Domain.Command
 {
-    public class MoveUpCommand : AbstractBaseCursorCommand
+    public class MoveUpCommand : AbstractBaseMoveCommand
     {
-        public MoveUpCommand(Cursor cursor) : base(cursor)
+        public MoveUpCommand(IMovable movable) : base(movable)
         {
         }
 
         public override void Execute()
         {
-            Cursor.MoveUp();
+            Movable.MoveUp();
         }
 
         public override void Undo()
         {
-            Cursor.MoveDown();
+            Movable.MoveDown();
         }
     }
 }

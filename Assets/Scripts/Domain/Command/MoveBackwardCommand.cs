@@ -2,20 +2,20 @@
 
 namespace Domain.Command
 {
-    public class MoveBackwardCommand : AbstractBaseCursorCommand
+    public class MoveBackwardCommand : AbstractBaseMoveCommand
     {
-        public MoveBackwardCommand(Cursor cursor) : base(cursor)
+        public MoveBackwardCommand(IMovable movable) : base(movable)
         {
         }
 
         public override void Execute()
         {
-            Cursor.MoveBackward();
+            Movable.MoveBackward();
         }
 
         public override void Undo()
         {
-            Cursor.MoveForward();
+            Movable.MoveForward();
         }
     }
 }
