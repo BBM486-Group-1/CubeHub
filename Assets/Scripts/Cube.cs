@@ -24,7 +24,19 @@ public class Cube : MonoBehaviour
     
     public void MoveRight()
     {
-        _gameObject.transform.Translate(1, 0, 0);
+        _gameObject.transform.Translate(1, 0, 0); 
+        
+        // TODO: This is the code for changing color of the cursor
+        foreach (Transform child in _gameObject.transform)
+        {
+
+            // Get the Renderer component from the new cube
+            var cubeRenderer = child.gameObject.GetComponent<Renderer>();
+
+            // Call SetColor using the shader property name "_Color" and setting the color to red
+            cubeRenderer.material.SetColor("_Color", Color.red);
+            
+        }
     }
     public void MoveUp()
     {
