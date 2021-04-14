@@ -17,25 +17,25 @@ namespace Behaviour
         {
             _cubes = new ArrayList();
 
-            for (var i = 0; i < numberOfCubes; i++ ){
+            for (var i = 0; i < numberOfCubes; i++)
+            {
                 var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                
-                var newMat = Resources.Load("BoxMaterial", typeof(Material)) as Material;
-                cube.GetComponent<MeshRenderer>().material = newMat;
-                
+
+                cube.GetComponent<MeshRenderer>().material = boxMaterial;
+                float hue = (((int) Random.Range(0, 360)) % 10) / 10.0f;
+                cube.GetComponent<Renderer>().material.color = Color.HSVToRGB(hue, 0.25f,0.5f);
+
                 var x = Random.Range(-20, 20);
-                var y = Random.Range(-5,   5);
+                var y = Random.Range(-5, 5);
                 var z = Random.Range(-20, 20);
                 cube.transform.position = new Vector3(x, y, z);
                 _cubes.Add(cube);
             }
-        
         }
 
         // Update is called once per frame
         void Update()
         {
-        
         }
     }
 }
