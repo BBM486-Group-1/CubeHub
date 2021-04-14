@@ -1,13 +1,21 @@
 ﻿using System.Collections.Generic;
 using Domain.Command;
 using UnityEngine;
+using Cursor = Domain.Object.Cursor;
 
 
 namespace Behaviour
 {
     public class InputHandler : MonoBehaviour
     {
-        private Dictionary<KeyCode, ICommand> _commands;
+        public enum InputType
+        {
+            KeyDown,
+            KeyHold,
+            KeyUp
+        };
+        
+        private Dictionary<InputType, Dictionary<KeyCode, ICommand>> _commands;
 
         [SerializeField] private CursorController cursorController;
 
@@ -15,51 +23,67 @@ namespace Behaviour
 
         // Start is called before the first frame update
         void Start()
-        {
-            _commands = new Dictionary<KeyCode, ICommand>();
+        { 
+            _commands = new Dictionary<InputType, Dictionary<KeyCode, ICommand>>();
 
-            RegisterCommand(KeyCode.A, new MoveLeftCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.D, new MoveRightCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.W, new MoveForwardCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.S, new MoveBackwardCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.R, new MoveUpCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.F, new MoveDownCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.Space, new ToggleSelectCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.LeftArrow, new MoveLeftCommand(flyCamera));
-            RegisterCommand(KeyCode.RightArrow, new MoveRightCommand(flyCamera));
-            RegisterCommand(KeyCode.UpArrow, new MoveForwardCommand(flyCamera));
-            RegisterCommand(KeyCode.DownArrow, new MoveBackwardCommand(flyCamera));
+            Cursor cursor = cursorController.GetCursor();
+            
+            RegisterCommand(InputType.KeyDown, KeyCode.A, new MoveLeftCommand(cursor));
+            RegisterCommand(InputType.KeyDown, KeyCode.D, new MoveRightCommand(cursor));
+            RegisterCommand(InputType.KeyDown, KeyCode.W, new MoveForwardCommand(cursor));
+            RegisterCommand(InputType.KeyDown, KeyCode.S, new MoveBackwardCommand(cursor));
+            RegisterCommand(InputType.KeyDown, KeyCode.R, new MoveUpCommand(cursor));
+            RegisterCommand(InputType.KeyDown, KeyCode.F, new MoveDownCommand(cursor));
+            RegisterCommand(InputType.KeyDown, KeyCode.Space, new ToggleSelectCommand(cursor));
+            
+            RegisterCommand(InputType.KeyHold, KeyCode.LeftArrow, new MoveLeftCommand(flyCamera));
+            RegisterCommand(InputType.KeyHold, KeyCode.RightArrow, new MoveRightCommand(flyCamera));
+            RegisterCommand(InputType.KeyHold, KeyCode.UpArrow, new MoveForwardCommand(flyCamera));
+            RegisterCommand(InputType.KeyHold, KeyCode.DownArrow, new MoveBackwardCommand(flyCamera));
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Input.anyKeyDown)
-            { 
-            }
-        }
-        
-        void OnGUI()
-        {
-            Event e = Event.current;
-            if (e.isKey && e.type == EventType.KeyDown)
+            // TODO: Is this too much?
+            foreach (var inputType in _commands.Keys)
             {
-                Debug.Log("Detected key code: " + e.keyCode);
-                if (_commands.ContainsKey(e.keyCode))
+                foreach (var key in _commands[inputType].Keys)
                 {
-                    KeyPressed(e.keyCode);
+                    if (inputType == InputType.KeyDown)
+                    {
+                        if (Input.GetKeyDown(key))
+                        {
+                            OnKeyEvent(inputType, key);
+                        }
+                    }
+                    if (inputType == InputType.KeyHold)
+                    {
+                        if (Input.GetKey(key))
+                        {
+                            OnKeyEvent(inputType, key);
+                        }
+                    }
+                    if (inputType == InputType.KeyUp)
+                    {
+                        if (Input.GetKeyUp(key))
+                        {
+                            OnKeyEvent(inputType, key);
+                        }
+                    }
                 }
             }
+        } 
+
+        public void RegisterCommand(InputType inputType, KeyCode key, ICommand command)
+        {
+            if (!_commands.ContainsKey(inputType)) _commands[inputType] = new Dictionary<KeyCode, ICommand>();
+            _commands[inputType][key] = command;
         }
 
-        public void RegisterCommand(KeyCode key, ICommand command)
+        public void OnKeyEvent(InputType inputType, KeyCode key)
         {
-            _commands[key] = command;
-        }
-
-        public void KeyPressed(KeyCode key)
-        {
-            _commands[key].Execute();
+            _commands[inputType][key].Execute();
 
             // this.undoButton = buttons[buttonNo];
         }
