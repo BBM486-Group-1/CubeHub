@@ -11,7 +11,7 @@ namespace Behaviour
 
         [SerializeField] private CursorController cursorController;
 
-        [SerializeField] private FlyCamera camera;
+        [SerializeField] private FlyCamera flyCamera;
 
         // Start is called before the first frame update
         void Start()
@@ -25,10 +25,10 @@ namespace Behaviour
             RegisterCommand(KeyCode.R, new MoveUpCommand(cursorController.GetCursor()));
             RegisterCommand(KeyCode.F, new MoveDownCommand(cursorController.GetCursor()));
             RegisterCommand(KeyCode.Space, new ToggleSelectCommand(cursorController.GetCursor()));
-            RegisterCommand(KeyCode.LeftArrow, new MoveLeftCommand(camera));
-            RegisterCommand(KeyCode.RightArrow, new MoveRightCommand(camera));
-            RegisterCommand(KeyCode.UpArrow, new MoveForwardCommand(camera));
-            RegisterCommand(KeyCode.DownArrow, new MoveBackwardCommand(camera));
+            RegisterCommand(KeyCode.LeftArrow, new MoveLeftCommand(flyCamera));
+            RegisterCommand(KeyCode.RightArrow, new MoveRightCommand(flyCamera));
+            RegisterCommand(KeyCode.UpArrow, new MoveForwardCommand(flyCamera));
+            RegisterCommand(KeyCode.DownArrow, new MoveBackwardCommand(flyCamera));
         }
 
         // Update is called once per frame
