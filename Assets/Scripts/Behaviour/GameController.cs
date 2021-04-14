@@ -16,11 +16,11 @@ namespace Behaviour
         {
             _cubes = new ArrayList();
 
-            for (int i = 0; i < numberOfCubes; i++ ){
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                int x = Random.Range(-20, 20);
-                int y = Random.Range(-5,   5);
-                int z = Random.Range(-20, 20);
+            for (var i = 0; i < numberOfCubes; i++ ){
+                var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                var x = Random.Range(-20, 20);
+                var y = Random.Range(-5,   5);
+                var z = Random.Range(-20, 20);
                 cube.transform.position = new Vector3(x, y, z);
                 _cubes.Add(cube);
             }

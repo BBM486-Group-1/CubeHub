@@ -19,6 +19,10 @@ namespace Behaviour
         
             RegisterCommand("a", new MoveLeftCommand(cursorController.GetCursor()));
             RegisterCommand("d", new MoveRightCommand(cursorController.GetCursor())); 
+            RegisterCommand("w", new MoveForwardCommand(cursorController.GetCursor()));
+            RegisterCommand("s", new MoveBackwardCommand(cursorController.GetCursor()));
+            RegisterCommand("t", new MoveUpCommand(cursorController.GetCursor())); 
+            RegisterCommand("g", new MoveDownCommand(cursorController.GetCursor())); 
             RegisterCommand(" ", new ToggleSelectCommand(cursorController.GetCursor()));
         }
 

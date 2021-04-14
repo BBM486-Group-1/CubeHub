@@ -33,7 +33,7 @@ namespace Domain
     
         public void MoveDown()
         {
-            GameObject.transform.Translate(1, -1, 0);
+            GameObject.transform.Translate(0, -1, 0);
         }
         public void MoveForward()
         {
