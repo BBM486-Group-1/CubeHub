@@ -153,8 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 100
-  _cursor: {fileID: 584594377}
-  _inputHandler: {fileID: 7828789}
+  inputHandler: {fileID: 7828789}
 --- !u!4 &7828788
 Transform:
   m_ObjectHideFlags: 0
@@ -181,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7854d4579110e6448925bfbc41e31334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cursor: {fileID: 584594377}
+  cursorController: {fileID: 584594377}
 --- !u!1 &538073737
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,11 +336,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 584594374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26805bb0cd2d4e1caee322da600f7520, type: 3}
+  m_Script: {fileID: 11500000, guid: f7a348d9689a401d9a0109440db526f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject: {fileID: 584594374}
-  isActive: 0
+  cursorObject: {fileID: 584594374}
 --- !u!1 &848359401
 GameObject:
   m_ObjectHideFlags: 0
