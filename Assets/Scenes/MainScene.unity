@@ -156,6 +156,7 @@ MonoBehaviour:
   numberOfCubes: 100
   boxMaterial: {fileID: 2100000, guid: b77099727f312cc42a7ba02959ddf301, type: 2}
   inputHandler: {fileID: 7828789}
+  cursorController: {fileID: 7828790}
 --- !u!4 &7828788
 Transform:
   m_ObjectHideFlags: 0
