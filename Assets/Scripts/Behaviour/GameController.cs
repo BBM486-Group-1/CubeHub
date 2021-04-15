@@ -15,6 +15,8 @@ namespace Behaviour
         [SerializeField] private CursorController cursorController;
 
         private DiscretePositionMap<Cube> _positionMap;
+
+        private Material _material;
         
         // Start is called before the first frame update
         void Start()
@@ -24,14 +26,19 @@ namespace Behaviour
             cursorController.GetCursor().SetCubePositionMap(_positionMap);
             
             List<Cube> cubes = new List<Cube>();
-
+            
+            Material newMat = Resources.Load("HologramMaterial", typeof(Material)) as Material;
             for (var i = 0; i < numberOfCubes; i++)
             {
                 var cubeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-                cubeObject.GetComponent<MeshRenderer>().material = boxMaterial;
+                
+                cubeObject.GetComponent<MeshRenderer>().material = newMat;
+                //newMat.SetColor("Color_368037F2", Color.HSVToRGB(hue, 0.25f, 0.5f));
+                
+                //cubeObject.GetComponent<MeshRenderer>().material = boxMaterial;
                 float hue = (Random.Range(0, 360) % 10) / 10.0f;
                 cubeObject.GetComponent<Renderer>().material.color = Color.HSVToRGB(hue, 0.25f, 0.5f);
+                
 
                 var x = Random.Range(-20, 20);
                 var y = Random.Range(-5, 5);
@@ -39,6 +46,8 @@ namespace Behaviour
                 cubeObject.transform.position = new Vector3(x, y, z);
                 Cube cube = new Cube(cubeObject);
                 cubes.Add(cube);
+
+                
                 _positionMap.Set(cubeObject.transform.position, cube);
             }
         }
