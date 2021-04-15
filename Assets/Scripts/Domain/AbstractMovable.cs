@@ -22,7 +22,7 @@ namespace Domain
             return GameObject.transform.position;
         }
 
-        private Vector3 SnapToNearestAxis(Vector3 direction)
+        private static Vector3 SnapToNearestAxis(Vector3 direction)
         {
             float x = Math.Abs(direction.x);
             float y = Math.Abs(direction.y);
