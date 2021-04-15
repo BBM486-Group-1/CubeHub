@@ -157,6 +157,7 @@ MonoBehaviour:
   boxMaterial: {fileID: 2100000, guid: e6b6d741ce49a734ea3b7d9672679b03, type: 2}
   inputHandler: {fileID: 7828789}
   cursorController: {fileID: 7828790}
+  glowIntensity: 2
 --- !u!4 &7828788
 Transform:
   m_ObjectHideFlags: 0

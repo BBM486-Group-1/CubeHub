@@ -15,6 +15,8 @@ namespace Behaviour
         [SerializeField] private InputHandler inputHandler;
 
         [SerializeField] private CursorController cursorController;
+        
+        [SerializeField] private float glowIntensity;
 
         private DiscretePositionMap<Cube> _cubePositionMap;
 
@@ -41,8 +43,7 @@ namespace Behaviour
 
                     float hue = (Random.Range(0, 360) % 10) / 10.0f;
                     Color rgb = Color.HSVToRGB(hue, 1f, 1f);
-                    float intensity = 4.5f;
-                    rgb = new Color(rgb.r * intensity, rgb.g * intensity, rgb.b * intensity);
+                    rgb = new Color(rgb.r * glowIntensity, rgb.g * glowIntensity, rgb.b * glowIntensity);
                     cubeObject.GetComponent<MeshRenderer>().material.SetColor(EmissionColor, rgb);
                     
                     cubeObject.transform.position = randomPosition;
