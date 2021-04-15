@@ -27,14 +27,15 @@ namespace Behaviour
             _commands = new Dictionary<InputType, Dictionary<KeyCode, ICommand>>();
 
             Cursor cursor = cursorController.GetCursor();
-
-            RegisterCommand(InputType.KeyDown, KeyCode.A, new MoveLeftCommand(cursor));
-            RegisterCommand(InputType.KeyDown, KeyCode.D, new MoveRightCommand(cursor));
-            RegisterCommand(InputType.KeyDown, KeyCode.W, new MoveForwardCommand(cursor));
-            RegisterCommand(InputType.KeyDown, KeyCode.S, new MoveBackwardCommand(cursor));
-            RegisterCommand(InputType.KeyDown, KeyCode.R, new MoveUpCommand(cursor));
-            RegisterCommand(InputType.KeyDown, KeyCode.F, new MoveDownCommand(cursor));
-            RegisterCommand(InputType.KeyDown, KeyCode.Space, new ToggleSelectCommand(cursor));
+            KeyCode[] inputs = MainMenu.inputs;
+            Debug.Log(inputs[0]);
+            RegisterCommand(InputType.KeyDown, inputs[0], new MoveLeftCommand(cursor));
+            RegisterCommand(InputType.KeyDown, inputs[1], new MoveRightCommand(cursor));
+            RegisterCommand(InputType.KeyDown, inputs[2], new MoveForwardCommand(cursor));
+            RegisterCommand(InputType.KeyDown, inputs[3], new MoveBackwardCommand(cursor));
+            RegisterCommand(InputType.KeyDown, inputs[4], new MoveUpCommand(cursor));
+            RegisterCommand(InputType.KeyDown, inputs[5], new MoveDownCommand(cursor));
+            RegisterCommand(InputType.KeyDown, inputs[6], new ToggleSelectCommand(cursor));
         } 
         
         // Update is called once per frame
