@@ -14,7 +14,7 @@
 
         public override void Undo()
         { 
-            
+            Movable.MoveLeft();
         }
     }
 }

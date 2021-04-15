@@ -16,11 +16,14 @@ namespace Behaviour
 
         private Dictionary<InputType, Dictionary<KeyCode, ICommand>> _commands;
 
+        private Stack<ICommand> _commandHistory;
+
         [SerializeField] private CursorController cursorController;
 
         // Start is called before the first frame update
         void Start()
         {
+            _commandHistory = new Stack<ICommand>();
             _commands = new Dictionary<InputType, Dictionary<KeyCode, ICommand>>();
 
             Cursor cursor = cursorController.GetCursor();
@@ -49,6 +52,10 @@ namespace Behaviour
                             case InputType.KeyDown:
                                 if (Input.GetKeyDown(key))
                                     OnKeyEvent(inputType, key);
+                                if (Input.GetKeyDown(KeyCode.U))
+                                {
+                                    UndoKeyPressed();
+                                }
                                 break;
                             case InputType.KeyHold:
                                 if (Input.GetKey(key))
@@ -73,11 +80,13 @@ namespace Behaviour
         public void OnKeyEvent(InputType inputType, KeyCode key)
         {
             _commands[inputType][key].Execute();
-            
+            _commandHistory.Push(_commands[inputType][key]);
         }
 
         public void UndoKeyPressed()
         {
+            if (_commandHistory.Count > 0)
+                _commandHistory.Pop().Undo();
         }
     }
 }

@@ -12,8 +12,8 @@
         }
 
         public override void Undo()
-        {
-            
+        {   
+            Movable.MoveRight();
         }
     }
 }
