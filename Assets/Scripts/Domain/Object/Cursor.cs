@@ -46,10 +46,8 @@ namespace Domain.Object
 
         private delegate void MoveFunction(IMovable movable);
 
-        private delegate void Func();
-
         // TODO: Is this a little bit too much complicated?
-        private void Move(MoveFunction move, MoveFunction reversed, Func moveCursor, Func reverseCursor)
+        private void Move(MoveFunction move, MoveFunction reversed, Action moveCursor, Action reverseCursor)
         {
             if (IsActive())
             {
@@ -58,7 +56,7 @@ namespace Domain.Object
                 {
                     var cursorPos = GetPosition();
                     Cube cube = _cubePositionMap.Get(cursorPos);
-                       
+
                     move(cube);
                     moveCursor();
                     var nextCursorPos = GetPosition();
@@ -69,7 +67,7 @@ namespace Domain.Object
                     }
                     else
                     {
-                        _cubePositionMap.Relocate(cursorPos, cube.GetPosition()); 
+                        _cubePositionMap.Relocate(cursorPos, cube.GetPosition());
                     }
                 }
                 else
@@ -85,7 +83,8 @@ namespace Domain.Object
 
         public override void MoveLeft()
         {
-            Move(cube => cube.MoveLeft(), cube => cube.MoveRight(), () => base.MoveLeft(), () => base.MoveRight());
+            Move(cube => cube.MoveLeft(), cube => cube.MoveRight(),
+                () => base.MoveLeft(), () => base.MoveRight());
         }
 
         public override void MoveRight()
@@ -105,12 +104,14 @@ namespace Domain.Object
 
         public override void MoveForward()
         {
-            Move(cube => cube.MoveForward(), cube => cube.MoveBackward(), () => base.MoveForward(), () => base.MoveBackward());
+            Move(cube => cube.MoveForward(), cube => cube.MoveBackward(), () => base.MoveForward(),
+                () => base.MoveBackward());
         }
 
         public override void MoveBackward()
         {
-            Move(cube => cube.MoveBackward(), cube => cube.MoveForward(), () => base.MoveBackward(), () => base.MoveForward());
+            Move(cube => cube.MoveBackward(), cube => cube.MoveForward(), () => base.MoveBackward(),
+                () => base.MoveForward());
         }
     }
 }
