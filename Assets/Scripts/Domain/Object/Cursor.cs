@@ -1,4 +1,5 @@
-﻿using DataStructure;
+﻿using System;
+using DataStructure;
 using UnityEngine;
 
 namespace Domain.Object
@@ -11,9 +12,9 @@ namespace Domain.Object
         }
 
         private DiscretePositionMap<Cube> _cubePositionMap;
-        
+
         private bool _isActive;
-    
+
         private static readonly int ColorPropertyName = Shader.PropertyToID("_Color");
 
         public void Toggle()
@@ -21,15 +22,15 @@ namespace Domain.Object
             _isActive = !_isActive;
             ToggleColor();
         }
-    
+
         private void ToggleColor()
         {
             foreach (Transform child in GameObject.transform)
-            { 
+            {
                 // Get the Renderer component from the new cube
                 var cubeRenderer = child.gameObject.GetComponent<Renderer>();
-                
-                cubeRenderer.material.SetColor(ColorPropertyName, IsActive() ? Color.red : Color.green); 
+
+                cubeRenderer.material.SetColor(ColorPropertyName, IsActive() ? Color.red : Color.green);
             }
         }
 
@@ -45,53 +46,71 @@ namespace Domain.Object
 
         private delegate void MoveFunction(IMovable movable);
 
-        private void MoveCubeUnderCursor(MoveFunction moveFunction)
-        { 
+        private delegate void Func();
+
+        // TODO: Is this a little bit too much complicated?
+        private void Move(MoveFunction move, MoveFunction reversed, Func moveCursor, Func reverseCursor)
+        {
             if (IsActive())
             {
-                if (_cubePositionMap.Occupied(GetPosition()))
+                bool thereIsACubeUnderCursor = _cubePositionMap.Occupied(GetPosition());
+                if (thereIsACubeUnderCursor)
                 {
                     Cube cube = _cubePositionMap.Get(GetPosition());
-                    moveFunction(cube);
-                    _cubePositionMap.Relocate(GetPosition(), cube.GetPosition());
+                       
+                    move(cube);
+                    moveCursor();
+                    if (_cubePositionMap.Occupied(GetPosition()))
+                    {
+                        reversed(cube);
+                        reverseCursor();
+                    }
+                    else
+                    {
+                        reverseCursor();
+                        _cubePositionMap.Relocate(GetPosition(), cube.GetPosition());
+                        moveCursor();
+                    }
+                }
+                else
+                {
+                    moveCursor();
                 }
             }
+            else
+            {
+                moveCursor();
+            }
         }
-        
+
         public override void MoveLeft()
         {
-            MoveCubeUnderCursor(cube => cube.MoveLeft());
-            base.MoveLeft();
+            Move(cube => cube.MoveLeft(), cube => cube.MoveRight(), () => base.MoveLeft(), () => base.MoveRight());
         }
 
         public override void MoveRight()
         {
-            MoveCubeUnderCursor(cube => cube.MoveRight());
-            base.MoveRight();
+            Move(cube => cube.MoveRight(), cube => cube.MoveLeft(), () => base.MoveRight(), () => base.MoveLeft());
         }
 
         public override void MoveUp()
         {
-            MoveCubeUnderCursor(cube => cube.MoveUp());
-            base.MoveUp();
+            Move(cube => cube.MoveUp(), cube => cube.MoveDown(), () => base.MoveUp(), () => base.MoveDown());
         }
 
         public override void MoveDown()
         {
-            MoveCubeUnderCursor(cube => cube.MoveDown());
-            base.MoveDown();
+            Move(cube => cube.MoveDown(), cube => cube.MoveUp(), () => base.MoveDown(), () => base.MoveUp());
         }
 
         public override void MoveForward()
         {
-            MoveCubeUnderCursor(cube => cube.MoveForward());
-            base.MoveForward();
+            Move(cube => cube.MoveForward(), cube => cube.MoveBackward(), () => base.MoveForward(), () => base.MoveBackward());
         }
 
         public override void MoveBackward()
         {
-            MoveCubeUnderCursor(cube => cube.MoveBackward());
-            base.MoveBackward();
+            Move(cube => cube.MoveBackward(), cube => cube.MoveForward(), () => base.MoveBackward(), () => base.MoveForward());
         }
     }
 }
