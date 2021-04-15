@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Domain
 {
@@ -21,14 +22,42 @@ namespace Domain
             return GameObject.transform.position;
         }
 
+        private Vector3 SnapToNearestAxis(Vector3 direction)
+        {
+            float x = Math.Abs(direction.x);
+            float y = Math.Abs(direction.y);
+            float z = Math.Abs(direction.z);
+            if (x > y && x > z){
+                return new Vector3(Math.Sign(direction.x),0,0);
+            } else if (y > x && y > z){
+                return new Vector3(0,Math.Sign(direction.y),0);
+            } else {
+                return new Vector3(0,0,Math.Sign(direction.z));
+            }
+        }
+
         public virtual void MoveLeft()
         {
-            GameObject.transform.Translate(-1, 0, 0);
+            var camera = Camera.main;
+
+            var cameraTransform = camera.transform; 
+            var right = cameraTransform.right; 
+
+            right = SnapToNearestAxis(right);
+            
+            GameObject.transform.Translate(-right);
         }
     
         public virtual void MoveRight()
         {
-            GameObject.transform.Translate(1, 0, 0);
+            var camera = Camera.main;
+
+            var cameraTransform = camera.transform; 
+            var right = cameraTransform.right; 
+
+            right = SnapToNearestAxis(right);
+            
+            GameObject.transform.Translate(right);
         }
         public virtual void MoveUp()
         {
@@ -41,12 +70,25 @@ namespace Domain
         }
         public virtual void MoveForward()
         {
-            GameObject.transform.Translate(0, 0, 1);
+            var camera = Camera.main;
+
+            var cameraTransform = camera.transform;
+            var forward = cameraTransform.forward; 
+
+            forward = SnapToNearestAxis(forward);
+            
+            GameObject.transform.Translate( forward);
         }
     
         public virtual void MoveBackward()
         {
-            GameObject.transform.Translate(0, 0, -1);
+            var camera = Camera.main;
+
+            var cameraTransform = camera.transform;
+            var forward = cameraTransform.forward; 
+            forward = SnapToNearestAxis(forward);
+            
+            GameObject.transform.Translate(-forward); 
         }
     }
 }
