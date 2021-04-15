@@ -105,7 +105,9 @@ namespace Behaviour
                 _orbitAngles += rotationSpeed * Time.unscaledDeltaTime * input;
                 _lastManualRotationTime = Time.unscaledTime;
                 return true;
-            }  
+            }
+
+            distance -= 2 * rotationSpeed * Time.unscaledDeltaTime * Input.GetAxis("Mouse ScrollWheel");
             
             return false;
         }
