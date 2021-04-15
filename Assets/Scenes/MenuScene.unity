@@ -555,7 +555,7 @@ RectTransform:
   m_Children:
   - {fileID: 8659896}
   m_Father: {fileID: 1431177509}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1229,7 +1229,7 @@ GameObject:
   - component: {fileID: 254999964}
   - component: {fileID: 254999963}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1565,7 +1565,7 @@ RectTransform:
   m_Children:
   - {fileID: 1424300348}
   m_Father: {fileID: 1431177509}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3058,7 +3058,7 @@ RectTransform:
   m_Children:
   - {fileID: 925229719}
   m_Father: {fileID: 1431177509}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3659,11 +3659,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1492336351}
-  - {fileID: 407854213}
-  - {fileID: 124354624}
   - {fileID: 1350195240}
-  - {fileID: 1456303409}
+  - {fileID: 124354624}
   - {fileID: 38481140}
+  - {fileID: 1456303409}
+  - {fileID: 407854213}
   - {fileID: 1546790228}
   m_Father: {fileID: 1876052307}
   m_RootOrder: 3
@@ -3907,9 +3907,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0.28235295}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.78431374}
-    m_PressedColor: {r: 1, g: 0.033018887, b: 0.033018887, a: 0.5882353}
-    m_SelectedColor: {r: 0.9712119, g: 1, b: 0.06132078, a: 0.28235295}
-    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4142,8 +4142,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -375}
-  m_SizeDelta: {x: 600, y: 200}
+  m_AnchoredPosition: {x: 0, y: -370}
+  m_SizeDelta: {x: 522.4055, y: 142.28705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638897521
 MonoBehaviour:
@@ -4396,7 +4396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1811170474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4432,7 +4432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeButton: {fileID: 0}
-  eventSystem: {fileID: 0}
+  eventSystem: {fileID: 476602825}
 --- !u!1 &1876052306
 GameObject:
   m_ObjectHideFlags: 0
@@ -4445,7 +4445,7 @@ GameObject:
   - component: {fileID: 1876052308}
   m_Layer: 5
   m_Name: OptionsMenu
-  m_TagString: Untagged
+  m_TagString: OptionsMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
