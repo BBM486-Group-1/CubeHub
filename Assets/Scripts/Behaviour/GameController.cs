@@ -7,47 +7,55 @@ namespace Behaviour
 {
     public class GameController : MonoBehaviour
     {
+        private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
         [SerializeField] private int numberOfCubes;
+
         [SerializeField] private Material boxMaterial;
 
         [SerializeField] private InputHandler inputHandler;
 
         [SerializeField] private CursorController cursorController;
 
-        private DiscretePositionMap<Cube> _positionMap;
-        
+        private DiscretePositionMap<Cube> _cubePositionMap;
+
         // Start is called before the first frame update
         void Start()
         {
-            _positionMap = new DiscretePositionMap<Cube>();
-            
-            cursorController.GetCursor().SetCubePositionMap(_positionMap);
-            
-            List<Cube> cubes = new List<Cube>();
+            _cubePositionMap = new DiscretePositionMap<Cube>();
 
-            for (var i = 0; i < numberOfCubes; i++)
+            cursorController.GetCursor().SetCubePositionMap(_cubePositionMap); 
+
+            int i = 0;
+            while (i < numberOfCubes)
             {
-                var cubeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                var glowMaterial = Resources.Load("Glow", typeof(Material)) as Material;
-                
-                cubeObject.GetComponent<MeshRenderer>().material = glowMaterial;
-                float hue = (Random.Range(0, 360) % 10) / 10.0f;
-                cubeObject.GetComponent<Renderer>().material.color = Color.HSVToRGB(hue, 0.25f, 0.5f);
-
-                var x = Random.Range(-20, 20);
+                var x = Random.Range(-5, 5);
                 var y = Random.Range(-5, 5);
-                var z = Random.Range(-20, 20);
-                cubeObject.transform.position = new Vector3(x, y, z);
-                Cube cube = new Cube(cubeObject);
-                cubes.Add(cube);
-                _positionMap.Set(cubeObject.transform.position, cube);
+                var z = Random.Range(10, 20);
+                var randomPosition = new Vector3(x, y, z);
+                
+                if (!_cubePositionMap.Occupied(randomPosition))
+                {
+                    var cubeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+                    cubeObject.GetComponent<MeshRenderer>().material = boxMaterial;
+
+                    float hue = (Random.Range(0, 360) % 10) / 10.0f;
+                    Color rgb = Color.HSVToRGB(hue, 1f, 1f);
+                    float intensity = 4.5f;
+                    rgb = new Color(rgb.r * intensity, rgb.g * intensity, rgb.b * intensity);
+                    cubeObject.GetComponent<MeshRenderer>().material.SetColor(EmissionColor, rgb);
+                    
+                    cubeObject.transform.position = randomPosition;
+                    Cube cube = new Cube(cubeObject); 
+                    _cubePositionMap.Set(randomPosition, cube);
+                    i++;
+                }
             }
         }
 
         // Update is called once per frame
         void Update()
-        { 
-            
+        {
         }
     }
 }

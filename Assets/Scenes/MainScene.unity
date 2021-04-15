@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCubes: 100
-  boxMaterial: {fileID: 2100000, guid: b77099727f312cc42a7ba02959ddf301, type: 2}
+  boxMaterial: {fileID: 2100000, guid: e6b6d741ce49a734ea3b7d9672679b03, type: 2}
   inputHandler: {fileID: 7828789}
   cursorController: {fileID: 7828790}
 --- !u!4 &7828788
