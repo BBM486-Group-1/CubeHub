@@ -1,92 +1,89 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System;
-using TMPro;
 
-public class MainMenu : MonoBehaviour
+namespace Behaviour
 {
-    bool isInputChangeActive = false;
-    public static KeyCode[] inputs;
-
-
-    public Button activeButton;
-    public EventSystem eventSystem;
-
-    public void PlayGame()
+    public class MainMenu : MonoBehaviour
     {
-        SceneManager.LoadScene("MainScene");
-    }
+        bool _isInputChangeActive = false;
+        public static KeyCode[] Inputs;
 
-    public void QuitGame()
-    {
-        Debug.Log("Quit!");
-        Application.Quit();
-    }
+        public Button activeButton;
+        public EventSystem eventSystem;
 
-    public void changeInput(Button button)
-    {
-        button.Select();
-        activeButton = button;
-        isInputChangeActive = true;
-
-    }
-    public void detectPressedKeyOrButton()
-    {
-        foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
+        public void PlayGame()
         {
-            if (Input.GetKeyDown(kcode))
+            SceneManager.LoadScene("MainScene");
+        }
+
+        public void QuitGame()
+        {
+            Debug.Log("Quit!");
+            Application.Quit();
+        }
+
+        public void ChangeInput(Button button)
+        {
+            button.Select();
+            activeButton = button;
+            _isInputChangeActive = true;
+        }
+
+        public void DetectPressedKeyOrButton()
+        {
+            foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
             {
-                Debug.Log("KeyCode down: " + kcode);
-                isInputChangeActive = false;
-                eventSystem.SetSelectedGameObject(null);
-                activeButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = kcode.ToString();
+                if (Input.GetKeyDown(kcode))
+                {
+                    Debug.Log("KeyCode down: " + kcode);
+                    _isInputChangeActive = false;
+                    eventSystem.SetSelectedGameObject(null);
+                    activeButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = kcode.ToString();
+                }
+            }
+
+            LoadInputs();
+        }
+
+        void Start()
+        {
+            LoadInputs();
+        }
+
+        void Update()
+        {
+            if (this._isInputChangeActive)
+            {
+                DetectPressedKeyOrButton();
             }
         }
-        loadInputs();
-    }
 
-    void Start()
-    {
-        
-        loadInputs();
-    }
-    void Update()
-    {
-        if (this.isInputChangeActive)
+        KeyCode StringToKeyCode(string key)
         {
-            detectPressedKeyOrButton();
-        }
-    }
-
-    KeyCode stringToKeyCode(string key)
-    {
-        KeyCode thisKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), key);
-        return thisKeyCode;
-    }
-
-
-    void loadInputs()
-    {
-        
-        Button[] buttons = GameObject.Find("Buttons").GetComponentsInChildren<Button>(true);
-        int buttonsNumber = buttons.Length;
-        inputs = new KeyCode[buttonsNumber];
-
-        for(int i = 0; i < buttonsNumber; i++)
-        {
-            string currentButtonText = buttons[i].GetComponentInChildren<TMP_Text>().text;
-            KeyCode currentKeyCode = stringToKeyCode(currentButtonText);
-            inputs[i] = currentKeyCode;
+            KeyCode thisKeyCode = (KeyCode) System.Enum.Parse(typeof(KeyCode), key);
+            return thisKeyCode;
         }
 
+        void LoadInputs()
+        {
+            Button[] buttons = GameObject.Find("Buttons").GetComponentsInChildren<Button>(true);
+            int buttonsNumber = buttons.Length;
+            Inputs = new KeyCode[buttonsNumber];
 
-        if(GameObject.Find("MainMenu") && GameObject.Find("MainMenu").activeSelf)
-            GameObject.Find("OptionsMenu").SetActive(false);
+            for (int i = 0; i < buttonsNumber; i++)
+            {
+                string currentButtonText = buttons[i].GetComponentInChildren<TMP_Text>().text;
+                KeyCode currentKeyCode = StringToKeyCode(currentButtonText);
+                Inputs[i] = currentKeyCode;
+            }
+
+
+            if (GameObject.Find("MainMenu") && GameObject.Find("MainMenu").activeSelf)
+                GameObject.Find("OptionsMenu").SetActive(false);
+        }
     }
 }
-
-

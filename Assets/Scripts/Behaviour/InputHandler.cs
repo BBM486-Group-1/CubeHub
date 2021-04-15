@@ -27,8 +27,7 @@ namespace Behaviour
             _commands = new Dictionary<InputType, Dictionary<KeyCode, ICommand>>();
 
             Cursor cursor = cursorController.GetCursor();
-            KeyCode[] inputs = MainMenu.inputs;
-            Debug.Log(inputs[0]);
+            KeyCode[] inputs = MainMenu.Inputs; 
             RegisterCommand(InputType.KeyDown, inputs[0], new MoveLeftCommand(cursor));
             RegisterCommand(InputType.KeyDown, inputs[1], new MoveRightCommand(cursor));
             RegisterCommand(InputType.KeyDown, inputs[2], new MoveForwardCommand(cursor));
