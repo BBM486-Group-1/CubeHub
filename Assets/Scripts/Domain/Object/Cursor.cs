@@ -28,8 +28,7 @@ namespace Domain.Object
             { 
                 // Get the Renderer component from the new cube
                 var cubeRenderer = child.gameObject.GetComponent<Renderer>();
-
-                // Call SetColor using the shader property name "_Color" and setting the color to red
+                
                 cubeRenderer.material.SetColor(ColorPropertyName, IsActive() ? Color.red : Color.green); 
             }
         }
@@ -44,16 +43,16 @@ namespace Domain.Object
             _cubePositionMap = map;
         }
 
-        private delegate void MoveCube(Cube cube);
+        private delegate void MoveFunction(IMovable movable);
 
-        private void MoveCubeUnderIfOccupied(MoveCube moveCube)
+        private void MoveCubeUnderCursor(MoveFunction moveFunction)
         { 
             if (IsActive())
             {
                 if (_cubePositionMap.Occupied(GetPosition()))
                 {
                     Cube cube = _cubePositionMap.Get(GetPosition());
-                    moveCube(cube);
+                    moveFunction(cube);
                     _cubePositionMap.Relocate(GetPosition(), cube.GetPosition());
                 }
             }
@@ -61,37 +60,37 @@ namespace Domain.Object
         
         public override void MoveLeft()
         {
-            MoveCubeUnderIfOccupied(cube => cube.MoveLeft());
+            MoveCubeUnderCursor(cube => cube.MoveLeft());
             base.MoveLeft();
         }
 
         public override void MoveRight()
         {
-            MoveCubeUnderIfOccupied(cube => cube.MoveRight());
+            MoveCubeUnderCursor(cube => cube.MoveRight());
             base.MoveRight();
         }
 
         public override void MoveUp()
         {
-            MoveCubeUnderIfOccupied(cube => cube.MoveUp());
+            MoveCubeUnderCursor(cube => cube.MoveUp());
             base.MoveUp();
         }
 
         public override void MoveDown()
         {
-            MoveCubeUnderIfOccupied(cube => cube.MoveDown());
+            MoveCubeUnderCursor(cube => cube.MoveDown());
             base.MoveDown();
         }
 
         public override void MoveForward()
         {
-            MoveCubeUnderIfOccupied(cube => cube.MoveForward());
+            MoveCubeUnderCursor(cube => cube.MoveForward());
             base.MoveForward();
         }
 
         public override void MoveBackward()
         {
-            MoveCubeUnderIfOccupied(cube => cube.MoveBackward());
+            MoveCubeUnderCursor(cube => cube.MoveBackward());
             base.MoveBackward();
         }
     }

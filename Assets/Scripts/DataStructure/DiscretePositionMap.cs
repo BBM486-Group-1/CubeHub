@@ -5,7 +5,7 @@ namespace DataStructure
 {
     public class DiscretePositionMap<T>
     {
-        private Dictionary<Vector3, T> _map;
+        private readonly Dictionary<Vector3, T> _map;
 
         public DiscretePositionMap()
         {
