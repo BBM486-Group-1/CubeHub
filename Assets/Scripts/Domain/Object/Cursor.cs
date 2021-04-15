@@ -56,20 +56,20 @@ namespace Domain.Object
                 bool thereIsACubeUnderCursor = _cubePositionMap.Occupied(GetPosition());
                 if (thereIsACubeUnderCursor)
                 {
-                    Cube cube = _cubePositionMap.Get(GetPosition());
+                    var cursorPos = GetPosition();
+                    Cube cube = _cubePositionMap.Get(cursorPos);
                        
                     move(cube);
                     moveCursor();
-                    if (_cubePositionMap.Occupied(GetPosition()))
+                    var nextCursorPos = GetPosition();
+                    if (_cubePositionMap.Occupied(nextCursorPos))
                     {
                         reversed(cube);
                         reverseCursor();
                     }
                     else
                     {
-                        reverseCursor();
-                        _cubePositionMap.Relocate(GetPosition(), cube.GetPosition());
-                        moveCursor();
+                        _cubePositionMap.Relocate(cursorPos, cube.GetPosition()); 
                     }
                 }
                 else
