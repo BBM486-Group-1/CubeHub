@@ -28,8 +28,9 @@ namespace Behaviour
             for (var i = 0; i < numberOfCubes; i++)
             {
                 var cubeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-                cubeObject.GetComponent<MeshRenderer>().material = boxMaterial;
+                var glowMaterial = Resources.Load("Glow", typeof(Material)) as Material;
+                
+                cubeObject.GetComponent<MeshRenderer>().material = glowMaterial;
                 float hue = (Random.Range(0, 360) % 10) / 10.0f;
                 cubeObject.GetComponent<Renderer>().material.color = Color.HSVToRGB(hue, 0.25f, 0.5f);
 
