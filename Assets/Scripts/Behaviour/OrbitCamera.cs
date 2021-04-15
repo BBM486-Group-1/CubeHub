@@ -49,22 +49,25 @@ namespace Behaviour
 
         void LateUpdate()
         {
-            UpdateFocusPoint();
-            Quaternion lookRotation;
-            if (ManualRotation() || AutomaticRotation())
+            if (!PauseMenu.GameIsPaused)
             {
-                ConstrainAngles();
-                lookRotation = Quaternion.Euler(_orbitAngles);
-            }
-            else
-            {
-                lookRotation = transform.localRotation;
-            }
+                UpdateFocusPoint();
+                Quaternion lookRotation;
+                if (ManualRotation() || AutomaticRotation())
+                {
+                    ConstrainAngles();
+                    lookRotation = Quaternion.Euler(_orbitAngles);
+                }
+                else
+                {
+                    lookRotation = transform.localRotation;
+                }
 
-            Vector3 lookDirection = lookRotation * Vector3.forward;
-            Vector3 lookPosition = _focusPoint - lookDirection * distance;
-            
-            transform.SetPositionAndRotation(lookPosition, lookRotation);
+                Vector3 lookDirection = lookRotation * Vector3.forward;
+                Vector3 lookPosition = _focusPoint - lookDirection * distance;
+
+                transform.SetPositionAndRotation(lookPosition, lookRotation);
+            }
         }
 
         void UpdateFocusPoint()

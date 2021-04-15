@@ -37,25 +37,28 @@ namespace Behaviour
         // Update is called once per frame
         void Update()
         {
-            foreach (var inputType in _commands.Keys)
+            if (!PauseMenu.GameIsPaused)
             {
-                foreach (var key in _commands[inputType].Keys)
+                foreach (var inputType in _commands.Keys)
                 {
-                    // TODO: Use delegates maybe?
-                    switch (inputType)
+                    foreach (var key in _commands[inputType].Keys)
                     {
-                        case InputType.KeyDown:
-                            if (Input.GetKeyDown(key))
-                                OnKeyEvent(inputType, key);
-                            break;
-                        case InputType.KeyHold:
-                            if (Input.GetKey(key))
-                                OnKeyEvent(inputType, key);
-                            break;
-                        case InputType.KeyUp:
-                            if (Input.GetKeyUp(key))
-                                OnKeyEvent(inputType, key);
-                            break;
+                        // TODO: Use delegates maybe?
+                        switch (inputType)
+                        {
+                            case InputType.KeyDown:
+                                if (Input.GetKeyDown(key))
+                                    OnKeyEvent(inputType, key);
+                                break;
+                            case InputType.KeyHold:
+                                if (Input.GetKey(key))
+                                    OnKeyEvent(inputType, key);
+                                break;
+                            case InputType.KeyUp:
+                                if (Input.GetKeyUp(key))
+                                    OnKeyEvent(inputType, key);
+                                break;
+                        }
                     }
                 }
             }
