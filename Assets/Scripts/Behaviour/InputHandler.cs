@@ -42,6 +42,12 @@ namespace Behaviour
         {
             if (!PauseMenu.GameIsPaused)
             {
+                
+                if (Input.GetKeyDown(KeyCode.U))
+                {
+                    UndoKeyPressed();
+                }
+                
                 foreach (var inputType in _commands.Keys)
                 {
                     foreach (var key in _commands[inputType].Keys)
@@ -52,10 +58,6 @@ namespace Behaviour
                             case InputType.KeyDown:
                                 if (Input.GetKeyDown(key))
                                     OnKeyEvent(inputType, key);
-                                if (Input.GetKeyDown(KeyCode.U))
-                                {
-                                    UndoKeyPressed();
-                                }
                                 break;
                             case InputType.KeyHold:
                                 if (Input.GetKey(key))
