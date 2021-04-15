@@ -40,55 +40,87 @@ namespace Domain
         {
             var camera = Camera.main;
 
-            var cameraTransform = camera.transform; 
-            var right = cameraTransform.right; 
+            if (!(camera is null))
+            {
+                var cameraTransform = camera.transform; 
+                var right = cameraTransform.right; 
 
-            right = SnapToNearestAxis(right);
+                right = SnapToNearestAxis(right);
             
-            GameObject.transform.Translate(-right);
+                GameObject.transform.Translate(-right);
+            }
         }
     
         public virtual void MoveRight()
         {
             var camera = Camera.main;
 
-            var cameraTransform = camera.transform; 
-            var right = cameraTransform.right; 
+            if (!(camera is null))
+            {
+                var cameraTransform = camera.transform; 
+                var right = cameraTransform.right; 
 
-            right = SnapToNearestAxis(right);
+                right = SnapToNearestAxis(right);
             
-            GameObject.transform.Translate(right);
+                GameObject.transform.Translate(right);
+            }
         }
         public virtual void MoveUp()
         {
-            GameObject.transform.Translate(0, 1, 0);
+            var camera = Camera.main;
+
+            if (!(camera is null))
+            {
+                var cameraTransform = camera.transform; 
+                var up = cameraTransform.up; 
+
+                up = SnapToNearestAxis(up);
+            
+                GameObject.transform.Translate(up);
+            }
         }
     
         public virtual void MoveDown()
         {
-            GameObject.transform.Translate(0, -1, 0);
+            var camera = Camera.main;
+
+            if (!(camera is null))
+            {
+                var cameraTransform = camera.transform; 
+                var up = cameraTransform.up; 
+
+                up = SnapToNearestAxis(up);
+            
+                GameObject.transform.Translate(-up);
+            }
         }
         public virtual void MoveForward()
         {
             var camera = Camera.main;
 
-            var cameraTransform = camera.transform;
-            var forward = cameraTransform.forward; 
+            if (!(camera is null))
+            {
+                var cameraTransform = camera.transform;
+                var forward = cameraTransform.forward; 
 
-            forward = SnapToNearestAxis(forward);
+                forward = SnapToNearestAxis(forward);
             
-            GameObject.transform.Translate( forward);
+                GameObject.transform.Translate( forward);
+            }
         }
     
         public virtual void MoveBackward()
         {
             var camera = Camera.main;
 
-            var cameraTransform = camera.transform;
-            var forward = cameraTransform.forward; 
-            forward = SnapToNearestAxis(forward);
+            if (!(camera is null))
+            {
+                var cameraTransform = camera.transform;
+                var forward = cameraTransform.forward; 
+                forward = SnapToNearestAxis(forward);
             
-            GameObject.transform.Translate(-forward); 
+                GameObject.transform.Translate(-forward);
+            }
         }
     }
 }
