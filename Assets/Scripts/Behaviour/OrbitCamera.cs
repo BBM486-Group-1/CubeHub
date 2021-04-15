@@ -2,6 +2,7 @@
 
 namespace Behaviour
 {
+    // Credit: https://catlikecoding.com/unity/tutorials/movement/orbit-camera/
     [RequireComponent(typeof(Camera))]
     public class OrbitCamera : MonoBehaviour
     {
@@ -96,7 +97,7 @@ namespace Behaviour
         {  
             Vector2 input = new Vector2(
                 -Input.GetAxis("Mouse Y"),  // Rotation on x-Axis
-                -Input.GetAxis("Mouse X")   // Rotation on y-Axis
+                Input.GetAxis("Mouse X")   // Rotation on y-Axis
             );
             const float e = 0.001f;
             if (input.x < -e || input.x > e || input.y < -e || input.y > e)
