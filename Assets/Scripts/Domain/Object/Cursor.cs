@@ -28,8 +28,7 @@ namespace Domain.Object
             { 
                 // Get the Renderer component from the new cube
                 var cubeRenderer = child.gameObject.GetComponent<Renderer>();
-
-                // Call SetColor using the shader property name "_Color" and setting the color to red
+                
                 cubeRenderer.material.SetColor(ColorPropertyName, IsActive() ? Color.red : Color.green); 
             }
         }

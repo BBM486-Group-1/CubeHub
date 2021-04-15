@@ -184,7 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorController: {fileID: 7828790}
-  flyCamera: {fileID: 963194229}
 --- !u!114 &7828790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,13 +619,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 952ad45f0575b3240a8be888d3406d72, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ffc1668e0114a9ba8f7b7fbb9b6e225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 5
-  speed: 10
-  shiftAdd: 25
-  maxShift: 100
+  focus: {fileID: 584594375}
+  distance: 5
+  focusRadius: 5
+  focusCentering: 0.5
+  rotationSpeed: 90
+  minVerticalAngle: -45
+  maxVerticalAngle: 45
+  alignDelay: 1
+  alignSmoothRange: 30
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &979404516
 GameObject:
   m_ObjectHideFlags: 0

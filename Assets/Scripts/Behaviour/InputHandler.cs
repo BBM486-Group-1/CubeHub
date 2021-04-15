@@ -13,20 +13,18 @@ namespace Behaviour
             KeyHold,
             KeyUp
         };
-        
+
         private Dictionary<InputType, Dictionary<KeyCode, ICommand>> _commands;
 
         [SerializeField] private CursorController cursorController;
 
-        [SerializeField] private FlyCamera flyCamera;
-
         // Start is called before the first frame update
         void Start()
-        { 
+        {
             _commands = new Dictionary<InputType, Dictionary<KeyCode, ICommand>>();
 
             Cursor cursor = cursorController.GetCursor();
-            
+
             RegisterCommand(InputType.KeyDown, KeyCode.A, new MoveLeftCommand(cursor));
             RegisterCommand(InputType.KeyDown, KeyCode.D, new MoveRightCommand(cursor));
             RegisterCommand(InputType.KeyDown, KeyCode.W, new MoveForwardCommand(cursor));
@@ -34,45 +32,34 @@ namespace Behaviour
             RegisterCommand(InputType.KeyDown, KeyCode.R, new MoveUpCommand(cursor));
             RegisterCommand(InputType.KeyDown, KeyCode.F, new MoveDownCommand(cursor));
             RegisterCommand(InputType.KeyDown, KeyCode.Space, new ToggleSelectCommand(cursor));
-            
-            RegisterCommand(InputType.KeyHold, KeyCode.LeftArrow, new MoveLeftCommand(flyCamera));
-            RegisterCommand(InputType.KeyHold, KeyCode.RightArrow, new MoveRightCommand(flyCamera));
-            RegisterCommand(InputType.KeyHold, KeyCode.UpArrow, new MoveForwardCommand(flyCamera));
-            RegisterCommand(InputType.KeyHold, KeyCode.DownArrow, new MoveBackwardCommand(flyCamera));
-        }
-
+        } 
+        
         // Update is called once per frame
         void Update()
         {
-            // TODO: Is this too much?
             foreach (var inputType in _commands.Keys)
             {
                 foreach (var key in _commands[inputType].Keys)
                 {
-                    if (inputType == InputType.KeyDown)
+                    // TODO: Use delegates maybe?
+                    switch (inputType)
                     {
-                        if (Input.GetKeyDown(key))
-                        {
-                            OnKeyEvent(inputType, key);
-                        }
-                    }
-                    if (inputType == InputType.KeyHold)
-                    {
-                        if (Input.GetKey(key))
-                        {
-                            OnKeyEvent(inputType, key);
-                        }
-                    }
-                    if (inputType == InputType.KeyUp)
-                    {
-                        if (Input.GetKeyUp(key))
-                        {
-                            OnKeyEvent(inputType, key);
-                        }
+                        case InputType.KeyDown:
+                            if (Input.GetKeyDown(key))
+                                OnKeyEvent(inputType, key);
+                            break;
+                        case InputType.KeyHold:
+                            if (Input.GetKey(key))
+                                OnKeyEvent(inputType, key);
+                            break;
+                        case InputType.KeyUp:
+                            if (Input.GetKeyUp(key))
+                                OnKeyEvent(inputType, key);
+                            break;
                     }
                 }
             }
-        } 
+        }
 
         public void RegisterCommand(InputType inputType, KeyCode key, ICommand command)
         {
@@ -83,8 +70,7 @@ namespace Behaviour
         public void OnKeyEvent(InputType inputType, KeyCode key)
         {
             _commands[inputType][key].Execute();
-
-            // this.undoButton = buttons[buttonNo];
+            
         }
 
         public void UndoKeyPressed()
