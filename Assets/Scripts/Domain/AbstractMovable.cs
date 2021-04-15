@@ -23,7 +23,6 @@ namespace Domain
 
         public virtual void MoveLeft()
         {
-            // TODO: Lerp these, instead of instantly translating.
             GameObject.transform.Translate(-1, 0, 0);
         }
     
