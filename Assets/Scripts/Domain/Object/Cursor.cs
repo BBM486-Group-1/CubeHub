@@ -44,10 +44,8 @@ namespace Domain.Object
             _cubePositionMap = map;
         }
 
-        private delegate void MoveFunction(IMovable movable);
-
         // TODO: Is this a little bit too much complicated?
-        private void Move(MoveFunction move, MoveFunction reversed, Action moveCursor, Action reverseCursor)
+        private void Move(Action<IMovable> move, Action<IMovable> reversed, Action moveCursor, Action reverseCursor)
         {
             if (IsActive())
             {
@@ -83,8 +81,7 @@ namespace Domain.Object
 
         public override void MoveLeft()
         {
-            Move(cube => cube.MoveLeft(), cube => cube.MoveRight(),
-                () => base.MoveLeft(), () => base.MoveRight());
+            Move(cube => cube.MoveLeft(), cube => cube.MoveRight(), () => base.MoveLeft(), () => base.MoveRight());
         }
 
         public override void MoveRight()
