@@ -2,4 +2,4 @@
 {
     void Execute();
     void Undo();
-} 
+}

@@ -1,6 +1,6 @@
 ﻿namespace Domain.Command
 {
-    public abstract  class AbstractBaseMoveCommand : ICommand
+    public abstract class AbstractBaseMoveCommand : ICommand
     {
         protected IMovable Movable;
 

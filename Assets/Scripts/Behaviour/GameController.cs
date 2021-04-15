@@ -15,7 +15,7 @@ namespace Behaviour
         [SerializeField] private InputHandler inputHandler;
 
         [SerializeField] private CursorController cursorController;
-        
+
         [SerializeField] private float glowIntensity;
 
         private DiscretePositionMap<Cube> _cubePositionMap;
@@ -25,7 +25,7 @@ namespace Behaviour
         {
             _cubePositionMap = new DiscretePositionMap<Cube>();
 
-            cursorController.GetCursor().SetCubePositionMap(_cubePositionMap); 
+            cursorController.GetCursor().SetCubePositionMap(_cubePositionMap);
 
             int i = 0;
             while (i < numberOfCubes)
@@ -34,7 +34,7 @@ namespace Behaviour
                 var y = Random.Range(-5, 5);
                 var z = Random.Range(10, 20);
                 var randomPosition = new Vector3(x, y, z);
-                
+
                 if (!_cubePositionMap.Occupied(randomPosition))
                 {
                     var cubeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -45,9 +45,9 @@ namespace Behaviour
                     Color rgb = Color.HSVToRGB(hue, 1f, 1f);
                     rgb = new Color(rgb.r * glowIntensity, rgb.g * glowIntensity, rgb.b * glowIntensity);
                     cubeObject.GetComponent<MeshRenderer>().material.SetColor(EmissionColor, rgb);
-                    
+
                     cubeObject.transform.position = randomPosition;
-                    Cube cube = new Cube(cubeObject); 
+                    Cube cube = new Cube(cubeObject);
                     _cubePositionMap.Set(randomPosition, cube);
                     i++;
                 }

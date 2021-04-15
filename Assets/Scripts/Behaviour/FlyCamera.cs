@@ -57,7 +57,7 @@ namespace Behaviour
             totalRun = Mathf.Clamp(totalRun * 0.5f, 1.0f, 1000.0f);
             p = p * speed;
 
-            p = p * Time.deltaTime; 
+            p = p * Time.deltaTime;
             transform.Translate(p);
 
             ResetInput();
@@ -106,7 +106,7 @@ namespace Behaviour
         {
             _moveDown = true;
         }
-        
+
         public void MoveLeft()
         {
             _moveLeft = true;

@@ -27,7 +27,7 @@ namespace Behaviour
             _commands = new Dictionary<InputType, Dictionary<KeyCode, ICommand>>();
 
             Cursor cursor = cursorController.GetCursor();
-            KeyCode[] inputs = MainMenu.Inputs; 
+            KeyCode[] inputs = MainMenu.Inputs;
             RegisterCommand(InputType.KeyDown, inputs[0], new MoveLeftCommand(cursor));
             RegisterCommand(InputType.KeyDown, inputs[1], new MoveRightCommand(cursor));
             RegisterCommand(InputType.KeyDown, inputs[2], new MoveForwardCommand(cursor));
@@ -35,19 +35,18 @@ namespace Behaviour
             RegisterCommand(InputType.KeyDown, inputs[4], new MoveUpCommand(cursor));
             RegisterCommand(InputType.KeyDown, inputs[5], new MoveDownCommand(cursor));
             RegisterCommand(InputType.KeyDown, inputs[6], new ToggleSelectCommand(cursor));
-        } 
-        
+        }
+
         // Update is called once per frame
         void Update()
         {
             if (!PauseMenu.GameIsPaused)
             {
-                
                 if (Input.GetKeyDown(KeyCode.U))
                 {
                     UndoKeyPressed();
                 }
-                
+
                 foreach (var inputType in _commands.Keys)
                 {
                     foreach (var key in _commands[inputType].Keys)

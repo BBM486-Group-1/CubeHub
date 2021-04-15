@@ -97,10 +97,10 @@ namespace Behaviour
         }
 
         bool ManualRotation()
-        {  
+        {
             Vector2 input = new Vector2(
-                -Input.GetAxis("Mouse Y"),  // Rotation on x-Axis
-                Input.GetAxis("Mouse X")   // Rotation on y-Axis
+                -Input.GetAxis("Mouse Y"), // Rotation on x-Axis
+                Input.GetAxis("Mouse X") // Rotation on y-Axis
             );
             const float e = 0.001f;
             if (input.x < -e || input.x > e || input.y < -e || input.y > e)
@@ -111,7 +111,7 @@ namespace Behaviour
             }
 
             distance -= 2 * rotationSpeed * Time.unscaledDeltaTime * Input.GetAxis("Mouse ScrollWheel");
-            
+
             return false;
         }
 

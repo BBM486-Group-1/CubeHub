@@ -6,7 +6,6 @@ namespace Domain.Object
     {
         public Cube(GameObject gameObject) : base(gameObject)
         {
-            
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Behaviour
 
         private void Start()
         {
-            
         }
 
         private void OnEnable()

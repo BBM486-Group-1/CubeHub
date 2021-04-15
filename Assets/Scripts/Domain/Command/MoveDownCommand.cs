@@ -2,7 +2,6 @@
 {
     public class MoveDownCommand : AbstractBaseMoveCommand
     {
-        
         public MoveDownCommand(IMovable movable) : base(movable)
         {
         }

@@ -2,7 +2,6 @@
 {
     public class MoveRightCommand : AbstractBaseMoveCommand
     {
-        
         public MoveRightCommand(IMovable movable) : base(movable)
         {
         }
@@ -13,7 +12,7 @@
         }
 
         public override void Undo()
-        { 
+        {
             Movable.MoveLeft();
         }
     }
